@@ -24,15 +24,19 @@ def check_service_version():
 	"""
 	try:
 		settings = frappe.get_single("NextIQ Settings")
-		if not settings.api_key:
+		if settings.connection_status != "Connected" or not settings.oauth_access_token:
 			return
 
-		api_key = settings.get_password("api_key")
+		from nextiq.api import _get_valid_access_token
+		try:
+			access_token = _get_valid_access_token()
+		except Exception:
+			return
 
 		response = requests.get(
 			f"{SERVICE_URL}/api/method/nextiq_service.api.get_service_info",
 			headers={
-				"X-NextIQ-API-Key":        api_key,
+				"Authorization":           f"Bearer {access_token}",
 				"X-NextIQ-Client-Version": nextiq.__version__,
 			},
 			timeout=10,

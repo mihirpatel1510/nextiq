@@ -4,7 +4,16 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "connection_section",
+  "connection_status",
+  "connected_email",
+  "oauth_col_break",
+  "oauth_access_token",
+  "oauth_refresh_token",
+  "token_expires_at",
   "api_key",
+  "oauth_client_id",
+  "relay_secret",
   "lead_destination_section",
   "lead_destination",
   "version_status_section",
@@ -16,11 +25,72 @@
  ],
  "fields": [
   {
-   "description": "Your API key from NextIQ Service (provided by the NextIQ team)",
+   "fieldname": "connection_section",
+   "fieldtype": "Section Break",
+   "label": "NextIQ Service Connection"
+  },
+  {
+   "fieldname": "connection_status",
+   "fieldtype": "Select",
+   "label": "Connection Status",
+   "options": "Not Connected\nConnected\nSuspended",
+   "default": "Not Connected",
+   "read_only": 1,
+   "in_list_view": 0,
+   "bold": 1
+  },
+  {
+   "fieldname": "connected_email",
+   "fieldtype": "Data",
+   "label": "Connected Account",
+   "read_only": 1,
+   "description": "Email of the NextIQ Service account this site is connected to."
+  },
+  {
+   "fieldname": "oauth_col_break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "oauth_access_token",
+   "fieldtype": "Password",
+   "label": "OAuth Access Token",
+   "hidden": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "oauth_refresh_token",
+   "fieldtype": "Password",
+   "label": "OAuth Refresh Token",
+   "hidden": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "token_expires_at",
+   "fieldtype": "Datetime",
+   "label": "Token Expires At",
+   "hidden": 1,
+   "read_only": 1
+  },
+  {
+   "description": "Legacy API key (used until OAuth is connected)",
    "fieldname": "api_key",
    "fieldtype": "Password",
-   "label": "API Key",
-   "reqd": 1
+   "label": "API Key (Legacy)"
+  },
+  {
+   "fieldname": "oauth_client_id",
+   "fieldtype": "Data",
+   "label": "OAuth Client ID",
+   "hidden": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "relay_secret",
+   "fieldtype": "Data",
+   "label": "Relay Secret",
+   "hidden": 1,
+   "read_only": 1,
+   "no_copy": 1
   },
   {
    "fieldname": "lead_destination_section",
