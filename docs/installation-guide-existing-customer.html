@@ -1,0 +1,497 @@
+<title>NextIQ Setup Guide — Existing Customer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --ink: #111111;
+    --ink-soft: #333333;
+    --paper: #ffffff;
+    --paper-raised: #ffffff;
+    --accent: #000000;
+    --accent-strong: #000000;
+    --accent-soft: #f0f0f0;
+    --line: #d5d5d5;
+    --muted: #5c5c5c;
+    --warn-bg: #f4f4f4;
+    --warn-line: #cccccc;
+    --warn-ink: #111111;
+    --safe-bg: #f4f4f4;
+    --safe-line: #cccccc;
+    --safe-ink: #111111;
+    --shadow: none;
+  }
+
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --ink: #f0f0f0;
+      --ink-soft: #cccccc;
+      --paper: #0e0e0e;
+      --paper-raised: #161616;
+      --accent: #ffffff;
+      --accent-strong: #ffffff;
+      --accent-soft: #232323;
+      --line: #3a3a3a;
+      --muted: #9a9a9a;
+      --warn-bg: #1c1c1c;
+      --warn-line: #3a3a3a;
+      --warn-ink: #f0f0f0;
+      --safe-bg: #1c1c1c;
+      --safe-line: #3a3a3a;
+      --safe-ink: #f0f0f0;
+      --shadow: none;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ink: #f0f0f0;
+    --ink-soft: #cccccc;
+    --paper: #0e0e0e;
+    --paper-raised: #161616;
+    --accent: #ffffff;
+    --accent-strong: #ffffff;
+    --accent-soft: #232323;
+    --line: #3a3a3a;
+    --muted: #9a9a9a;
+    --warn-bg: #1c1c1c;
+    --warn-line: #3a3a3a;
+    --warn-ink: #f0f0f0;
+    --safe-bg: #1c1c1c;
+    --safe-line: #3a3a3a;
+    --safe-ink: #f0f0f0;
+    --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Seravek, "Gill Sans Nova", "Trebuchet MS", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600;
+    text-wrap: balance;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  code, .kbd, .mono {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.88em;
+  }
+
+  a { color: var(--accent-strong); }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    padding: 64px 24px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 48px;
+  }
+  .masthead .eyebrow {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 14px;
+  }
+  .masthead h1 {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .masthead p {
+    max-width: 520px;
+    margin: 16px auto 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+  /* ---------- path picker ---------- */
+  .paths {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+  @media (max-width: 620px) {
+    .paths { grid-template-columns: 1fr; }
+  }
+  .path-card {
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 20px;
+    background: var(--paper-raised);
+    box-shadow: var(--shadow);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .path-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .path-card .tag {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .path-card h3 {
+    font-size: 1.18rem;
+    margin: 8px 0 6px;
+    color: var(--ink);
+  }
+  .path-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  /* ---------- sections ---------- */
+  section.path { margin-bottom: 72px; }
+  .path-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+    scroll-margin-top: 24px;
+  }
+  .path-head .tag {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .path-head h2 { font-size: 1.6rem; }
+  section.path > .lede {
+    color: var(--muted);
+    max-width: 60ch;
+    margin: 10px 0 32px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 18px;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+  }
+  .step:last-child { border-bottom: 1px solid var(--line); }
+
+  .step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600;
+    font-size: 0.98rem;
+  }
+  .path-a .step-num { background: var(--accent); color: var(--paper-raised); }
+  .path-b .step-num { background: transparent; border: 1.5px solid var(--accent); color: var(--accent); }
+
+  .step h3 {
+    font-size: 1.08rem;
+    margin-bottom: 6px;
+  }
+  .skip-tag {
+    font-family: Seravek, "Gill Sans Nova", "Trebuchet MS", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .step p { margin: 0 0 10px; color: var(--ink-soft); }
+  .step p:last-child { margin-bottom: 0; }
+
+  .btn-label {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.85em;
+    font-weight: 600;
+  }
+
+  /* ---------- screenshot placeholder ---------- */
+  .shot {
+    margin-top: 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--paper-raised);
+  }
+  .shot .bar {
+    display: flex;
+    gap: 6px;
+    padding: 9px 12px;
+    background: var(--accent-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .shot .bar span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+  }
+  .shot .body {
+    aspect-ratio: 16 / 7.5;
+    margin: 12px;
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px;
+  }
+  .shot .body span {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    max-width: 46ch;
+  }
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .shot figcaption {
+    padding: 10px 14px 12px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- callouts ---------- */
+  .callout {
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 14px;
+    font-size: 0.92rem;
+    border: 1px solid;
+  }
+  .callout.safe { background: var(--safe-bg); border-color: var(--safe-line); color: var(--safe-ink); }
+  .callout.warn { background: var(--warn-bg); border-color: var(--warn-line); color: var(--warn-ink); }
+  .callout strong { display: block; margin-bottom: 3px; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding-top: 48px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .path-card { transition: none; }
+  }
+  .cmd {
+    margin: 10px 0 0;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--accent-soft);
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--ink);
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <span class="eyebrow">NextIQ · Setup Guide · Existing Customer</span>
+  </div>
+
+  <div class="paths">
+    <a class="path-card" href="#cloud">
+      <span class="tag">Frappe Cloud</span>
+      <h3>I use Frappe Cloud</h3>
+      <p>Managed hosting through the Frappe Cloud dashboard.</p>
+    </a>
+    <a class="path-card" href="#self-hosted">
+      <span class="tag">Self-Hosted</span>
+      <h3>I run my own bench</h3>
+      <p>A bench on your own server, managed via the command line.</p>
+    </a>
+  </div>
+
+  <section class="path path-b" id="cloud">
+    <div class="path-head">
+      <span class="tag">Frappe Cloud</span>
+      <h2>Moving from your API key to the new connection</h2>
+    </div>
+    <p class="lede">Six steps. Your scan history, remaining quota, and everything else on your account carry over automatically — there's nothing to re-enter.</p>
+
+    <div class="callout safe" style="margin-bottom: 8px;">
+      <strong>Scanning won't stop working</strong>
+      Your existing API key keeps scanning cards throughout this process. There's no window where NextIQ is unavailable on your site.
+    </div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Log in to NextIQ Service <span class="skip-tag">— skip if you're already logged in</span></h3>
+        <p>Go to <a href="https://nextiq.in" target="_blank" rel="noopener">nextiq.in</a> and log in. If you've never logged in before (your site has only used an API key so far), sign up instead at <a href="https://nextiq.in/signup" target="_blank" rel="noopener">nextiq.in/signup</a> — use the same email your account is associated with if you can, it helps match you to your existing history automatically.</p>
+        <div class="callout warn">
+          <strong>Stay logged in</strong>
+          Keep this NextIQ Service tab signed in — you'll need that same logged-in session later for the connection to complete instantly.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Update the NextIQ app</h3>
+        <p>From your Frappe Cloud dashboard, open your site's <strong>Bench</strong>, go to <strong>Apps</strong>, and select <span class="btn-label">Update Available</span>. In the dialog, check <strong>NextIQ</strong> and select <span class="btn-label">Next</span>, then select your site to deploy the update to.</p>
+        <div class="shot">
+          <div class="bar"><span></span><span></span><span></span></div>
+          <div class="body" style="aspect-ratio:auto;margin:0;border:none;padding:0;display:block;"><img src="screenshots/update-bench-dialog.png" alt="Update Bench dialog with NextIQ selected, from dev-v2 to oauth"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Open NextIQ Settings</h3>
+        <p>Search for <strong>NextIQ Settings</strong> in the awesome bar (<span class="kbd mono">Ctrl/Cmd + K</span>). You'll see a <span class="btn-label">Disconnect</span> button here — that's expected, even though you've never manually connected before.</p>
+        <div class="shot">
+          <div class="bar"><span></span><span></span><span></span></div>
+          <div class="body" style="aspect-ratio:auto;margin:0;border:none;padding:0;display:block;"><img src="screenshots/settings-disconnect-state.jpg" alt="NextIQ Settings showing Connected status and Disconnect action after updating"></div>
+        </div>
+        <div class="callout warn">
+          <strong>Why does it say "Disconnect" already?</strong>
+          The update recognizes your working API key and marks the connection as active so nothing looks broken. It doesn't mean you're on the new sign-in system yet — that's what the next two steps are for.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Select Disconnect</h3>
+        <p>This only resets that status label — it does not touch your API key, your scan history, or your quota. Your site keeps scanning normally.</p>
+        <div class="shot">
+          <div class="bar"><span></span><span></span><span></span></div>
+          <div class="body" style="aspect-ratio:auto;margin:0;border:none;padding:0;display:block;"><img src="screenshots/settings-after-disconnect.jpg" alt="NextIQ Settings after clicking Disconnect, showing Not Connected"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div>
+        <h3>Select Connect to NextIQ Service</h3>
+        <p>This button now appears in its place. Make sure you're still logged in to NextIQ Service (Step 1), then select it — the connection completes instantly with no extra sign-in prompt.</p>
+        <div class="shot">
+          <div class="bar"><span></span><span></span><span></span></div>
+          <div class="body" style="aspect-ratio:auto;margin:0;border:none;padding:0;display:block;"><img src="screenshots/settings-connect-button.jpg" alt="NextIQ Settings with the Connect to NextIQ Service action"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div>
+        <h3>You're connected — nothing lost</h3>
+        <p>You're returned to your site with a <strong>Connected</strong> confirmation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="path path-b" id="self-hosted">
+    <div class="path-head">
+      <span class="tag">Self-Hosted</span>
+      <h2>Moving from your API key to the new connection</h2>
+    </div>
+    <p class="lede">Six steps. Your scan history, remaining quota, and everything else on your account carry over automatically — there's nothing to re-enter.</p>
+
+    <div class="callout safe" style="margin-bottom: 8px;">
+      <strong>Scanning won't stop working</strong>
+      Your existing API key keeps scanning cards throughout this process. There's no window where NextIQ is unavailable on your site.
+    </div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Log in to NextIQ Service <span class="skip-tag">— skip if you're already logged in</span></h3>
+        <p>Go to <a href="https://nextiq.in" target="_blank" rel="noopener">nextiq.in</a> and log in. If you've never logged in before (your site has only used an API key so far), sign up instead at <a href="https://nextiq.in/signup" target="_blank" rel="noopener">nextiq.in/signup</a> — use the same email your account is associated with if you can, it helps match you to your existing history automatically.</p>
+        <div class="callout warn">
+          <strong>Stay logged in</strong>
+          Keep this NextIQ Service tab signed in — you'll need that same logged-in session later for the connection to complete instantly.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Update the NextIQ app</h3>
+        <p>From your bench directory:</p>
+        <pre class="cmd">cd apps/nextiq && git pull origin main && cd ../..
+bench --site your-site.com migrate
+bench restart</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Open NextIQ Settings</h3>
+        <p>Search for <strong>NextIQ Settings</strong> in the awesome bar (<span class="kbd mono">Ctrl/Cmd + K</span>). You'll see a <span class="btn-label">Disconnect</span> button here — that's expected, even though you've never manually connected before.</p>
+        <div class="callout warn">
+          <strong>Why does it say "Disconnect" already?</strong>
+          The update recognizes your working API key and marks the connection as active so nothing looks broken. It doesn't mean you're on the new sign-in system yet — that's what the next two steps are for.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Select Disconnect</h3>
+        <p>This only resets that status label — it does not touch your API key, your scan history, or your quota. Your site keeps scanning normally.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div>
+        <h3>Select Connect to NextIQ Service</h3>
+        <p>This button now appears in its place. Make sure you're still logged in to NextIQ Service (Step 1), then select it — the connection completes instantly with no extra sign-in prompt.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div>
+        <h3>You're connected — nothing lost</h3>
+        <p>You're returned to your site with a <strong>Connected</strong> confirmation.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>NextIQ · AI-powered business card scanning for ERPNext</footer>
+
+</div>

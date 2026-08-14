@@ -1,0 +1,484 @@
+<title>NextIQ Setup Guide — New Customer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --ink: #111111;
+    --ink-soft: #333333;
+    --paper: #ffffff;
+    --paper-raised: #ffffff;
+    --accent: #000000;
+    --accent-strong: #000000;
+    --accent-soft: #f0f0f0;
+    --line: #d5d5d5;
+    --muted: #5c5c5c;
+    --warn-bg: #f4f4f4;
+    --warn-line: #cccccc;
+    --warn-ink: #111111;
+    --safe-bg: #f4f4f4;
+    --safe-line: #cccccc;
+    --safe-ink: #111111;
+    --shadow: none;
+  }
+
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --ink: #f0f0f0;
+      --ink-soft: #cccccc;
+      --paper: #0e0e0e;
+      --paper-raised: #161616;
+      --accent: #ffffff;
+      --accent-strong: #ffffff;
+      --accent-soft: #232323;
+      --line: #3a3a3a;
+      --muted: #9a9a9a;
+      --warn-bg: #1c1c1c;
+      --warn-line: #3a3a3a;
+      --warn-ink: #f0f0f0;
+      --safe-bg: #1c1c1c;
+      --safe-line: #3a3a3a;
+      --safe-ink: #f0f0f0;
+      --shadow: none;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ink: #f0f0f0;
+    --ink-soft: #cccccc;
+    --paper: #0e0e0e;
+    --paper-raised: #161616;
+    --accent: #ffffff;
+    --accent-strong: #ffffff;
+    --accent-soft: #232323;
+    --line: #3a3a3a;
+    --muted: #9a9a9a;
+    --warn-bg: #1c1c1c;
+    --warn-line: #3a3a3a;
+    --warn-ink: #f0f0f0;
+    --safe-bg: #1c1c1c;
+    --safe-line: #3a3a3a;
+    --safe-ink: #f0f0f0;
+    --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Seravek, "Gill Sans Nova", "Trebuchet MS", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600;
+    text-wrap: balance;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  code, .kbd, .mono {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.88em;
+  }
+
+  a { color: var(--accent-strong); }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    padding: 64px 24px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 48px;
+  }
+  .masthead .eyebrow {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 14px;
+  }
+  .masthead h1 {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .masthead p {
+    max-width: 520px;
+    margin: 16px auto 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+  /* ---------- path picker ---------- */
+  .paths {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+  @media (max-width: 620px) {
+    .paths { grid-template-columns: 1fr; }
+  }
+  .path-card {
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 20px;
+    background: var(--paper-raised);
+    box-shadow: var(--shadow);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .path-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .path-card .tag {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .path-card h3 {
+    font-size: 1.18rem;
+    margin: 8px 0 6px;
+    color: var(--ink);
+  }
+  .path-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  /* ---------- sections ---------- */
+  section.path { margin-bottom: 72px; }
+  .path-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+    scroll-margin-top: 24px;
+  }
+  .path-head .tag {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .path-head h2 { font-size: 1.6rem; }
+  section.path > .lede {
+    color: var(--muted);
+    max-width: 60ch;
+    margin: 10px 0 32px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 18px;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+  }
+  .step:last-child { border-bottom: 1px solid var(--line); }
+
+  .step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600;
+    font-size: 0.98rem;
+  }
+  .path-a .step-num { background: var(--accent); color: var(--paper-raised); }
+  .path-b .step-num { background: transparent; border: 1.5px solid var(--accent); color: var(--accent); }
+
+  .step h3 {
+    font-size: 1.08rem;
+    margin-bottom: 6px;
+  }
+  .skip-tag {
+    font-family: Seravek, "Gill Sans Nova", "Trebuchet MS", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .step p { margin: 0 0 10px; color: var(--ink-soft); }
+  .step p:last-child { margin-bottom: 0; }
+
+  .btn-label {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.85em;
+    font-weight: 600;
+  }
+
+  /* ---------- screenshot placeholder ---------- */
+  .shot {
+    margin-top: 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--paper-raised);
+  }
+  .shot .bar {
+    display: flex;
+    gap: 6px;
+    padding: 9px 12px;
+    background: var(--accent-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .shot .bar span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+  }
+  .shot .body {
+    aspect-ratio: 16 / 7.5;
+    margin: 12px;
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px;
+  }
+  .shot .body span {
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    max-width: 46ch;
+  }
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .shot figcaption {
+    padding: 10px 14px 12px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- callouts ---------- */
+  .callout {
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 14px;
+    font-size: 0.92rem;
+    border: 1px solid;
+  }
+  .callout.safe { background: var(--safe-bg); border-color: var(--safe-line); color: var(--safe-ink); }
+  .callout.warn { background: var(--warn-bg); border-color: var(--warn-line); color: var(--warn-ink); }
+  .callout strong { display: block; margin-bottom: 3px; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding-top: 48px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .path-card { transition: none; }
+  }
+  .cmd {
+    margin: 10px 0 0;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--accent-soft);
+    font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--ink);
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <span class="eyebrow">NextIQ · Setup Guide · New Customer</span>
+  </div>
+
+  <div class="paths">
+    <a class="path-card" href="#cloud">
+      <span class="tag">Frappe Cloud</span>
+      <h3>I use Frappe Cloud</h3>
+      <p>Managed hosting through the Frappe Cloud dashboard.</p>
+    </a>
+    <a class="path-card" href="#self-hosted">
+      <span class="tag">Self-Hosted</span>
+      <h3>I run my own bench</h3>
+      <p>A bench on your own server, managed via the command line.</p>
+    </a>
+  </div>
+
+  <section class="path path-a" id="cloud">
+    <div class="path-head">
+      <span class="tag">Frappe Cloud</span>
+      <h2>New customer setup</h2>
+    </div>
+    <p class="lede">Six steps: sign up, install NextIQ on your Frappe Cloud site, and connect.</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Sign up for your NextIQ account <span class="skip-tag">— skip if you already have one</span></h3>
+        <p>Before connecting, create your account directly at <a href="https://nextiq.in/signup" target="_blank" rel="noopener">nextiq.in/signup</a> — fill in your name, email, and a password. Use the email you want scan notifications and quota alerts sent to. Already have a NextIQ account? Just make sure you're logged in and skip to Step 2.</p>
+        <div class="callout warn">
+          <strong>Stay logged in</strong>
+          Keep this NextIQ Service tab signed in — you'll need that same logged-in session later for the connection to complete instantly.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Add the NextIQ app to your bench</h3>
+        <p>Open your site's <strong>Bench</strong> from the dashboard, go to the <strong>Apps</strong> tab, select <span class="btn-label">Add App</span>, then <span class="btn-label">Add from GitHub</span>. Enter:</p>
+        <p><code>https://github.com/SatatTech/nextiq.git</code><br>Branch: <code>main</code></p>
+        <div class="shot">
+          <div class="bar"><span></span><span></span><span></span></div>
+          <div class="body" style="aspect-ratio:auto;margin:0;border:none;padding:0;display:block;"><img src="screenshots/add-app-from-github.png" alt="Add app from GitHub dialog with the NextIQ repository URL filled in"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Install NextIQ on your site</h3>
+        <p>Once the app has finished being added to your bench, go back to your <strong>Site</strong>, open the <strong>Apps</strong> tab, select <span class="btn-label">Install App</span>, and choose <strong>NextIQ</strong> from the list.</p>
+        <div class="shot">
+          <div class="bar"><span></span><span></span><span></span></div>
+          <div class="body" style="aspect-ratio:auto;margin:0;border:none;padding:0;display:block;"><img src="screenshots/install-app-picker.png" alt="Install app on your site picker showing NextIQ available to install"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Open NextIQ Settings</h3>
+        <p>Back on your site, search for <strong>NextIQ Settings</strong> in the awesome bar (top search, press <span class="kbd mono">Ctrl/Cmd + K</span>). You'll see a <span class="btn-label">Connect to NextIQ Service</span> button — select it. Since you're still logged in to NextIQ Service from the previous step, this connects instantly with no further sign-in prompt.</p>
+        <div class="shot">
+          <div class="bar"><span></span><span></span><span></span></div>
+          <div class="body" style="aspect-ratio:auto;margin:0;border:none;padding:0;display:block;"><img src="screenshots/settings-connect-button.jpg" alt="NextIQ Settings with the Connect to NextIQ Service action"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div>
+        <h3>You're connected</h3>
+        <p>You're automatically returned to your site with a <strong>Connected</strong> confirmation. A starter allowance of free scans is added to your account right away — no extra step needed.</p>
+        <div class="shot">
+          <div class="bar"><span></span><span></span><span></span></div>
+          <div class="body" style="aspect-ratio:auto;margin:0;border:none;padding:0;display:block;"><img src="screenshots/connected-confirmation.jpg" alt="Connected confirmation page after completing the OAuth flow"></div>
+        </div>
+        <div class="callout safe">
+          <strong>Nothing to configure</strong>
+          Your quota, connection, and account are all set up automatically the moment you land back on this screen.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div>
+        <h3>Start scanning</h3>
+        <p>Go to your site, open the <strong>NextIQ</strong> workspace, and select <strong>Scan Portal</strong>. Photograph a business card and submit it — NextIQ reads the card and creates a Lead for you automatically.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="path path-b" id="self-hosted">
+    <div class="path-head">
+      <span class="tag">Self-Hosted</span>
+      <h2>New customer setup</h2>
+    </div>
+    <p class="lede">Six steps: sign up, get the app on your bench, and connect.</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Sign up for your NextIQ account <span class="skip-tag">— skip if you already have one</span></h3>
+        <p>Before connecting, create your account directly at <a href="https://nextiq.in/signup" target="_blank" rel="noopener">nextiq.in/signup</a> — fill in your name, email, and a password. Use the email you want scan notifications and quota alerts sent to.</p>
+        <div class="callout warn">
+          <strong>Stay logged in</strong>
+          Keep this NextIQ Service tab signed in — you'll need that same logged-in session later for the connection to complete instantly.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Get the app</h3>
+        <p>From your bench directory:</p>
+        <pre class="cmd">bench get-app https://github.com/SatatTech/nextiq.git --branch main</pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Install it on your site</h3>
+        <pre class="cmd">bench --site your-site.com install-app nextiq
+bench --site your-site.com migrate</pre>
+        <p>Restart the bench if it's running in production mode (<code>bench restart</code>).</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Open NextIQ Settings</h3>
+        <p>Log in to your site and search for <strong>NextIQ Settings</strong> in the awesome bar (<span class="kbd mono">Ctrl/Cmd + K</span>). Select <span class="btn-label">Connect to NextIQ Service</span>. Since you're still logged in to NextIQ Service from Step 1, this connects instantly with no further sign-in prompt.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div>
+        <h3>You're connected</h3>
+        <p>You're returned to your site with a <strong>Connected</strong> confirmation. A starter allowance of free scans is added to your account right away — no extra step needed.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div>
+        <h3>Start scanning</h3>
+        <p>Go to your site, open the <strong>NextIQ</strong> workspace, and select <strong>Scan Portal</strong>. Photograph a business card and submit it — NextIQ reads the card and creates a Lead for you automatically.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>NextIQ · AI-powered business card scanning for ERPNext</footer>
+
+</div>
