@@ -9,7 +9,7 @@
 </div>
 
 <div align="center">
-    <img src="./docs/images/hero.png"/>
+    <img src="./nextiq/public/images/hero.png"/>
 </div>
 
 <div align="center">
@@ -77,7 +77,7 @@ Experience NextIQ and see how automated business card scanning can simplify lead
 
 ### Satat Tech
 
-[LinkedIn](https://www.linkedin.com/company/satat-tech-llp/) · [Instagram](https://www.instagram.com/satat.tech/) · [Website](https://satatsolutions.in/)
+[LinkedIn](https://www.linkedin.com/company/satat-tech-llp/) · [Instagram](https://www.instagram.com/satat.tech/) · [Website](https://satat.tech/)
 
 ### NextIQ
 
@@ -85,7 +85,7 @@ Experience NextIQ and see how automated business card scanning can simplify lead
 
 <br />
 <div align="center" style="padding-top: 0.75rem;">
-    <a href="https://satatsolutions.in/" target="_blank">
+    <a href="https://satat.tech/" target="_blank">
         <img src="./nextiq/public/images/satat_logo.jpg" alt="Satat Tech" height="48"/>
     </a>
 </div>
