@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="nextiq-tile" x1="16" y1="0" x2="16" y2="32" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#27272a" />
+      <stop offset="1" stop-color="#09090b" />
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="7.5" fill="url(#nextiq-tile)" />
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7" fill="none" stroke="#ffffff" stroke-opacity="0.14" />
+  <path d="M10 22V11L20 22V11" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M25 4.6C25 6.94 26.26 8.2 28.6 8.2C26.26 8.2 25 9.46 25 11.8C25 9.46 23.74 8.2 21.4 8.2C23.74 8.2 25 6.94 25 4.6Z" fill="#ffffff" />
+</svg>

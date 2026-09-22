@@ -1,6 +1,6 @@
 <div align="center">
     <a href="https://nextiq.in">
-        <img src="./docs/images/nextiq-logo.png" alt="NextIQ Logo" height="80px" width="80px"/>
+        <img src="./nextiq/public/images/icon.svg" alt="NextIQ Logo" height="80px" width="80px"/>
     </a>
     <h2>NextIQ</h2>
     <p align="center">
@@ -90,6 +90,6 @@ Experience NextIQ and see how automated business card scanning can simplify lead
 <br />
 <div align="center" style="padding-top: 0.75rem;">
     <a href="https://satatsolutions.in/" target="_blank">
-        <img src="./docs/images/satat-tech-logo.png" alt="Satat Tech" height="28"/>
+        <img src="./nextiq/public/images/satat_logo.png" alt="Satat Tech" height="28"/>
     </a>
 </div>
