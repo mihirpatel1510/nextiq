@@ -86,6 +86,6 @@ Experience NextIQ and see how automated business card scanning can simplify lead
 <br />
 <div align="center" style="padding-top: 0.75rem;">
     <a href="https://satatsolutions.in/" target="_blank">
-        <img src="./nextiq/public/images/satat_logo.png" alt="Satat Tech" height="48"/>
+        <img src="./nextiq/public/images/satat_logo.jpg" alt="Satat Tech" height="48"/>
     </a>
 </div>
