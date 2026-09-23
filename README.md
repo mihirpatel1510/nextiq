@@ -54,20 +54,16 @@ NextIQ combines AI and automation to simplify sales data entry and follow-up.
 <summary>How NextIQ Works</summary>
 
 **Scan Portal**
-
-<img src="./nextiq/public/images/scan_portal_image.jpeg"/>
+	<p align="center"><img src="./nextiq/public/images/scan_portal_image.jpeg" width="300"/></p>
 
 **Add Note**
-
-<img src="./nextiq/public/images/add_note_image.jpeg"/>
+	<p align="center"><img src="./nextiq/public/images/add_note_image.jpeg" width="300"/></p>
 
 **Lead Creation**
-
-<img src="./nextiq/public/images/Lead_image.png"/>
+	<img src="./nextiq/public/images/Lead_image.png"/>
 
 **Notes**
-
-<img src="./nextiq/public/images/Notes_image.png"/>
+	<img src="./nextiq/public/images/Notes_image.png"/>
 
 </details>
 
