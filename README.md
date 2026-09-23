@@ -6,6 +6,7 @@
     <p align="center">
         <p>AI-Powered Lead Capture Inside ERPNext</p>
     </p>
+    <h3><a href="https://satat.tech/" target="_blank">Satat Tech</a>, Frappe Partner</h3>
 </div>
 
 <div align="center">
@@ -73,9 +74,9 @@ NextIQ is built inside the ERPNext ecosystem, allowing businesses to capture lea
 
 ## Try NextIQ
 
-Experience NextIQ and see how automated business card scanning can simplify lead creation.
+Register on NextIQ and follow the [documentation](https://nextiq.in/docs/nextiq-guidelines) to experience how automated business card scanning can simplify lead creation.
 
-**[Try NextIQ](https://nextiq.in)**
+**[Try NextIQ](https://nextiq.in/signup/new)**
 
 ## Connect With Us
 
