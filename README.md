@@ -52,16 +52,24 @@ NextIQ combines AI and automation to simplify sales data entry and follow-up.
 <details open>
 
 <summary>How NextIQ Works</summary>
-    <img src="./docs/images/how-it-works-1-scan.png"/>
-    <img src="./docs/images/how-it-works-2-extract.png"/>
-    <img src="./docs/images/how-it-works-3-create.png"/>
-    <img src="./docs/images/how-it-works-4-followup.png"/>
-</details>
 
-1. **Scan**: Scan a business card using NextIQ.
-2. **Extract**: AI reads and extracts the information from the card.
-3. **Create**: The information is automatically converted into lead data.
-4. **Follow Up**: Add notes, voice notes, tasks, and events to manage the lead.
+**Scan Portal**
+
+<img src="./nextiq/public/images/scan_portal_image.jpeg"/>
+
+**Add Note**
+
+<img src="./nextiq/public/images/add_note_image.jpeg"/>
+
+**Lead Creation**
+
+<img src="./nextiq/public/images/Lead_image.png"/>
+
+**Notes**
+
+<img src="./nextiq/public/images/Notes_image.png"/>
+
+</details>
 
 ### Built Inside ERPNext
 
